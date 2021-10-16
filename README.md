@@ -1,2 +1,3 @@
 # WinAPI_Practice
-Windows API Practice, making simple game
+Windows API Practice, making a simple game
+ 
