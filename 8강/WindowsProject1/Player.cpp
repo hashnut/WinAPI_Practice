@@ -21,9 +21,9 @@ void Player::Init()
 void Player::Update()
 {
 	// 키입력 처리
-	if (GetAsyncKeyState(VK_LEFT) & 0x8000 || GetAsyncKeyState('A') & 0x8000) // 0x0001
+	if (g_pKeyManager->isStayDown(VK_LEFT) || g_pKeyManager->isStayKeyDown('A')) // 0x0001
 		m_ptPos1.x -= (m_rtBox1.left >= m_fMoveSpeed) ? m_fMoveSpeed : 0;
-	else if (GetAsyncKeyState(VK_RIGHT) & 0x8000 || GetAsyncKeyState('D') & 0x8000)
+	else if (g_pKeyManager->isStayDown(VK_RIGHT) || g_pKeyManager->isStayKeyDown('D'))
 		m_ptPos1.x += (m_rtBox1.right <= WINSIZEX - m_fMoveSpeed) ? m_fMoveSpeed : 0;
 
 	// 포지션 위치에 따른 렉트 정보 업데이트

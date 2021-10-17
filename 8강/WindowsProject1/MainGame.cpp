@@ -14,11 +14,13 @@ MainGame::MainGame()
 
 	// 아이템 오브젝트 클래스
 	m_pItem = new Item;
+
 }
 
 
 MainGame::~MainGame()
 {
+	g_pKeyManager->ReleaseInstance();
 }
 
 void MainGame::Init()

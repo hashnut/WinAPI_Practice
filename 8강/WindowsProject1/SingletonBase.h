@@ -5,10 +5,44 @@
 - 인스턴스를 호출 시 처음 호출하는 경우 인스턴스를 생성하고 생성된 인스턴스를 반환한다.
 - 인스턴스를 호출 시 이전에 호출되어 생성이 되어 있는 경우, 그 생성되어 있는 인스턴스를 반환한다.
 
+템플릿(Template, 형판) : 함수 또는 클래스를 만들어 내기 위한 틀
+- 정해지지 않은 자료형에 대한 선언을 템플릿을 사용하여 하고 기능을 구현한다.
+- 함수 또는 클래스 작성 시 템플릿에 사용될 자료형을 결정해준다.
 */
 
+template <typename T>
 class SingletonBase
 {
-protected:
+protected: 
+	static T* Instance;
 
+	SingletonBase() {};
+	~SingletonBase() {};
+
+
+public:
+	static T* GetInstance();	// 싱글톤 인스턴스 가져오기
+	void ReleaseInstance();		// 싱글톤 인스턴스 해제하기
 };
+
+template <typename T>
+T* SingletonBase<T>::Instance = NULL;
+
+
+template<typename T>
+inline T* SingletonBase<T>::GetInstance()
+{
+	if (!Instance)
+		Instance = new T;
+
+	return Instance;
+}
+
+template<typename T>
+inline void SingletonBase<T>::ReleaseInstance()
+{
+	if (Instance) {
+		delete Instance;
+		Instance = NULL;
+	}
+}
