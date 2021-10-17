@@ -6,11 +6,14 @@
 
 MainGame::MainGame()
 	: m_pPlayer(NULL)
-	, m_pObjects(NULL)
+	, m_pObjects(NULL), m_pItem(NULL)
 {
 	// 플레이어, 오브젝트 클래스(객체) 생성
 	m_pPlayer = new Player;
 	m_pObjects = new Objects;
+
+	// 아이템 오브젝트 클래스
+	m_pItem = new Item;
 }
 
 
@@ -26,6 +29,7 @@ void MainGame::Init()
 	// 클래스 초기화
 	if (m_pPlayer) m_pPlayer->Init();
 	if (m_pObjects) m_pObjects->Init();
+	if (m_pItem) m_pItem->Init();
 }
 
 void MainGame::Update()
@@ -39,6 +43,8 @@ void MainGame::Update()
 	// 클래스 업데이트
 	if (m_pPlayer) m_pPlayer->Update();
 	if (m_pObjects) m_pObjects->Update();
+
+	if (m_pItem) m_pItem->Update();
 
 	vector<tagBox>::iterator iter;
 
@@ -62,6 +68,9 @@ void MainGame::Update()
 			m_pObjects->GetBox().erase(iter);
 			break;
 		}
+		else if (IntersectRect(&rt, &m_pItem->GetShield(), &rtIter)) {
+			m_pItem->MinusShieldHP();
+		}
 	}
 }
 
@@ -74,6 +83,7 @@ void MainGame::Render()
 	// 클래스 렌더
 	if (m_pPlayer) m_pPlayer->Render();
 	if (m_pObjects) m_pObjects->Render();
+	if (m_pItem) m_pItem->Render();
 
 	char szBuf[32];
 

@@ -2,7 +2,7 @@
 #include "GameNode.h"
 #include "Player.h"
 #include "Objects.h"
-
+#include "Item.h"
 
 class MainGame : public GameNode
 {
@@ -12,6 +12,7 @@ private:
 
 	Player*			m_pPlayer;
 	Objects*		m_pObjects;
+	Item*			m_pItem;
 
 public:
 	MainGame();
