@@ -14,7 +14,7 @@ Player::~Player()
 void Player::Init()
 {
 	m_ptPos1 = { WINSIZEX / 2, WINSIZEY - 30 };
-	m_fMoveSpeed = 20;
+	m_fMoveSpeed = 1;
 }
 
 void Player::Update()

@@ -13,12 +13,12 @@ Objects::~Objects()
 
 void Objects::Init()
 {
-	m_nDelay = 50;
+	m_nDelay = 1000;
 }
 
 void Objects::Update()
 {
-	if (m_nDelay >= 50)
+	if (m_nDelay >= 1000)
 	{
 		tagBox box;
 		box.rt.left = rand() % (WINSIZEX - 15);
@@ -26,7 +26,7 @@ void Objects::Update()
 		box.rt.top = -30;
 		box.rt.bottom = 0;
 
-		box.speed = rand() % 11 + 5;
+		box.speed = (rand() % 11 + 5) / 10.0f;
 
 		m_vecBox.push_back(box);
 		m_nDelay = rand() % 50;

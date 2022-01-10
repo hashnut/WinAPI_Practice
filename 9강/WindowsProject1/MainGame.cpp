@@ -8,6 +8,9 @@ MainGame::MainGame()
 	: m_pPlayer(NULL)
 	, m_pObjects(NULL)
 {
+	srand((unsigned int)time(NULL));
+
+
 	// 플레이어, 오브젝트 클래스(객체) 생성
 	m_pPlayer = new Player;
 	m_pObjects = new Objects;
@@ -31,7 +34,7 @@ void MainGame::Init()
 
 void MainGame::Update()
 {
-	InvalidateRect(g_hWnd, NULL, true);
+	InvalidateRect(g_hWnd, NULL, false);
 
 	m_nLevel = m_nScore / 100 + 1;
 	// 레벨 정보를 오브젝트에 넘겨줘야 한다.
@@ -70,7 +73,9 @@ void MainGame::Render()
 {
 	PAINTSTRUCT ps;
 
-	g_hDC = BeginPaint(g_hWnd, &ps);
+	HDC hdc = BeginPaint(g_hWnd, &ps);
+
+	PatBlt(g_hDC, 0, 0, WINSIZEX, WINSIZEY, WHITENESS);
 
 	// 클래스 렌더
 	if (m_pPlayer) m_pPlayer->Render();
@@ -85,6 +90,8 @@ void MainGame::Render()
 	_itoa_s(m_nScore, szBuf, 10);
 	str = string(szBuf);
 	TextOutA(g_hDC, 10, 30, str.c_str(), str.length());
+
+	BitBlt(hdc, 0, 0, WINSIZEX, WINSIZEY, g_hDC, 0, 0, SRCCOPY);
 
 	EndPaint(g_hWnd, &ps);
 }
